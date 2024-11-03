@@ -1,0 +1,65 @@
+<span class="hljs-meta"><!DOCTYPE <span class="hljs-keyword">html</span>></span>
+<span class="hljs-tag"><<span class="hljs-name">html</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">"en"</span>></span>
+<span class="hljs-tag"><<span class="hljs-name">head</span>></span>
+    <span class="hljs-tag"><<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">"UTF-8"</span>></span>
+    <span class="hljs-tag"><<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"viewport"</span> <span class="hljs-attr">content</span>=<span class="hljs-string">"width=device-width, initial-scale=1.0"</span>></span>
+    <span class="hljs-tag"><<span class="hljs-name">title</span>></span>Motor Control<span class="hljs-tag"></<span class="hljs-name">title</span>></span>
+    <span class="hljs-tag"><<span class="hljs-name">style</span>></span><span class="language-css">
+        <span class="hljs-selector-tag">body</span> {
+            <span class="hljs-attribute">font-family</span>: Arial, sans-serif;
+            <span class="hljs-attribute">text-align</span>: center;
+            <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#f0f0f0</span>;
+            <span class="hljs-attribute">padding</span>: <span class="hljs-number">20px</span>;
+        }
+        <span class="hljs-selector-tag">button</span> {
+            <span class="hljs-attribute">padding</span>: <span class="hljs-number">15px</span> <span class="hljs-number">20px</span>;
+            <span class="hljs-attribute">font-size</span>: <span class="hljs-number">16px</span>;
+            <span class="hljs-attribute">margin</span>: <span class="hljs-number">10px</span>;
+            <span class="hljs-attribute">cursor</span>: pointer;
+            <span class="hljs-attribute">border</span>: none;
+            <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">5px</span>;
+            <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#007BFF</span>;
+            <span class="hljs-attribute">color</span>: white;
+            <span class="hljs-attribute">transition</span>: background-color <span class="hljs-number">0.3s</span>;
+        }
+        <span class="hljs-selector-tag">button</span><span class="hljs-selector-pseudo">:hover</span> {
+            <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#0056b3</span>;
+        }
+        <span class="hljs-selector-id">#video</span> {
+            <span class="hljs-attribute">max-width</span>: <span class="hljs-number">100%</span>;
+            <span class="hljs-attribute">height</span>: auto;
+        }
+    </span><span class="hljs-tag"></<span class="hljs-name">style</span>></span>
+<span class="hljs-tag"></<span class="hljs-name">head</span>></span>
+<span class="hljs-tag"><<span class="hljs-name">body</span>></span>
+    <span class="hljs-tag"><<span class="hljs-name">h1</span>></span>Управление моторчиками<span class="hljs-tag"></<span class="hljs-name">h1</span>></span>
+    
+    <span class="hljs-tag"><<span class="hljs-name">h2</span>></span>Управление Мотором 1<span class="hljs-tag"></<span class="hljs-name">h2</span>></span>
+    <span class="hljs-tag"><<span class="hljs-name">button</span> <span class="hljs-attr">onclick</span>=<span class="hljs-string">"move(1, 'forward')"</span>></span>Вперед<span class="hljs-tag"></<span class="hljs-name">button</span>></span>
+    <span class="hljs-tag"><<span class="hljs-name">button</span> <span class="hljs-attr">onclick</span>=<span class="hljs-string">"move(1, 'backward')"</span>></span>Назад<span class="hljs-tag"></<span class="hljs-name">button</span>></span>
+
+    <span class="hljs-tag"><<span class="hljs-name">h2</span>></span>Управление Мотором 2<span class="hljs-tag"></<span class="hljs-name">h2</span>></span>
+    <span class="hljs-tag"><<span class="hljs-name">button</span> <span class="hljs-attr">onclick</span>=<span class="hljs-string">"move(2, 'forward')"</span>></span>Вперед<span class="hljs-tag"></<span class="hljs-name">button</span>></span>
+    <span class="hljs-tag"><<span class="hljs-name">button</span> <span class="hljs-attr">onclick</span>=<span class="hljs-string">"move(2, 'backward')"</span>></span>Назад<span class="hljs-tag"></<span class="hljs-name">button</span>></span>
+    <span class="hljs-tag"><<span class="hljs-name">button</span> <span class="hljs-attr">onclick</span>=<span class="hljs-string">"stop()"</span>></span>Стоп<span class="hljs-tag"></<span class="hljs-name">button</span>></span>
+
+    <span class="hljs-tag"><<span class="hljs-name">h2</span>></span>Видеопоток<span class="hljs-tag"></<span class="hljs-name">h2</span>></span>
+    <span class="hljs-tag"><<span class="hljs-name">img</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"video"</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"{{ url_for('video_feed') }}"</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">"Video feed"</span>></span>
+
+    <span class="hljs-tag"><<span class="hljs-name">script</span>></span><span class="language-javascript">
+        <span class="hljs-keyword">function</span> <span class="hljs-title function_">move</span>(<span class="hljs-params">motor, direction</span>) {
+            <span class="hljs-title function_">fetch</span>(<span class="hljs-string">'/move'</span>, {
+                <span class="hljs-attr">method</span>: <span class="hljs-string">'POST'</span>,
+                <span class="hljs-attr">headers</span>: {
+                    <span class="hljs-string">'Content-Type'</span>: <span class="hljs-string">'application/x-www-form-urlencoded'</span>,
+                },
+                <span class="hljs-attr">body</span>: <span class="hljs-keyword">new</span> <span class="hljs-title class_">URLSearchParams</span>({<span class="hljs-string">'motor'</span>: motor, <span class="hljs-string">'direction'</span>: direction})
+            });
+        }
+
+        <span class="hljs-keyword">function</span> <span class="hljs-title function_">stop</span>(<span class="hljs-params"></span>) {
+            <span class="hljs-title function_">fetch</span>(<span class="hljs-string">'/stop'</span>);
+        }
+    </span><span class="hljs-tag"></<span class="hljs-name">script</span>></span>
+<span class="hljs-tag"></<span class="hljs-name">body</span>></span>
+<span class="hljs-tag"></<span class="hljs-name">html</span>></span>
